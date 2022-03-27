@@ -11,7 +11,6 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.5",
     "expo": "~42.0.1",
-    "expo-av": "~9.2.3",
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -27,7 +26,6 @@
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
     "@types/react-router-native": "^5.1.1",
-    "@types/styled-components-react-native": "^5.1.1",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "babel-plugin-module-resolver": "^4.1.0",
