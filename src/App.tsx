@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';
 import { ThemeProvider } from 'react-native-elements';
 import { ROUTES } from 'utils/routes';
-import HomePage from 'src/components/HomePage/HomePage';
+import HomePage from 'components/HomePage/HomePage';
 
 export default function App() {
   return (

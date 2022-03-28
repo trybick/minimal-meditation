@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useBackButtonHandler } from 'hooks/useBackButtonHandler';
-import Header from '../Header/Header';
+import Header from 'components/Header/Header';
 
 export default function HomePage() {
   useBackButtonHandler();
