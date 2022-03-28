@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useBackButtonHandler } from 'hooks/useBackButtonHandler';
 import Header from '../Header/Header';
 
@@ -9,7 +9,9 @@ export default function HomePage() {
   return (
     <ScrollView>
       <Header pageTitle="Word Categories" />
-      <View style={styles.pageContainer}>home</View>
+      <View style={styles.pageContainer}>
+        <Text>home</Text>
+      </View>
     </ScrollView>
   );
 }
