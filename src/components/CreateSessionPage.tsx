@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Button, Header, Text } from 'react-native-elements';
+import { ROUTES } from 'utils/routes';
 
 export default function CreateSessionPage() {
   const history = useHistory();
@@ -8,7 +9,11 @@ export default function CreateSessionPage() {
   return (
     <View>
       <Header
-        leftComponent={{ text: 'Back', style: { color: '#fff' }, onPress: () => history.push('/') }}
+        leftComponent={{
+          text: 'Back',
+          style: { color: '#fff' },
+          onPress: () => history.push(ROUTES.HOME),
+        }}
         centerComponent={{ text: 'Create', style: { color: '#fff' } }}
       />
 
@@ -17,7 +22,7 @@ export default function CreateSessionPage() {
 
         <Button
           buttonStyle={{ marginBottom: 50 }}
-          onPress={() => history.push('/')}
+          onPress={() => history.push(ROUTES.HOME)}
           title="Go Home"
         />
       </View>

@@ -11,7 +11,7 @@ export default function HomePage() {
 
   return (
     <ScrollView>
-      <Header pageTitle="Word Categories" />
+      <Header pageTitle="Home" />
       <View style={styles.pageContainer}>
         <Text>home</Text>
 
