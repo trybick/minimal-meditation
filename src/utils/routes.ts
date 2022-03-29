@@ -1,4 +1,4 @@
 export const ROUTES = {
   HOME: '/',
-  WORD_LIST: '/wordlist',
+  CREATE: '/create',
 } as const;
