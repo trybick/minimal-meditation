@@ -1,4 +1,3 @@
-import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { useBackButtonHandler } from 'hooks/useBackButtonHandler';

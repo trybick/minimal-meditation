@@ -1,4 +1,3 @@
-import React from 'react';
 import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';

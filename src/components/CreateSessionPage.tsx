@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Button, Header, Text } from 'react-native-elements';

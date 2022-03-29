@@ -1,4 +1,3 @@
-import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { useHistory } from 'react-router-native';
 import { Header as HeaderComponent } from 'react-native-elements';
