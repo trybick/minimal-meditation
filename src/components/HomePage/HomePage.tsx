@@ -11,7 +11,7 @@ export default function HomePage() {
 
   return (
     <ScrollView>
-      <Header pageTitle="Home" />
+      <Header />
       <View style={styles.pageContainer}>
         <Text>home</Text>
 

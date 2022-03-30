@@ -11,7 +11,7 @@ export default function App() {
     <ThemeProvider>
       <NativeRouter>
         <BackButton />
-        <StatusBar style="auto" />
+        <StatusBar style="dark" />
 
         <Switch>
           <Route exact path={ROUTES.HOME} component={HomePage} />
