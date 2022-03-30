@@ -11,8 +11,7 @@ export default function App() {
     <ThemeProvider>
       <NativeRouter>
         <BackButton />
-        <StatusBar style="dark" />
-
+        <StatusBar hidden />
         <Switch>
           <Route exact path={ROUTES.HOME} component={HomePage} />
           <Route exact path={ROUTES.CREATE} component={CreateSessionPage} />
