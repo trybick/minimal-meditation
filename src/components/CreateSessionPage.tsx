@@ -1,22 +1,14 @@
 import { StyleSheet, View } from 'react-native';
 import { useHistory } from 'react-router-native';
-import { Button, Header, Text } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { ROUTES } from 'utils/routes';
+import Layout from 'components/common/Layout';
 
 export default function CreateSessionPage() {
   const history = useHistory();
 
   return (
-    <View>
-      <Header
-        leftComponent={{
-          text: 'Back',
-          style: { color: '#fff' },
-          onPress: () => history.push(ROUTES.HOME),
-        }}
-        centerComponent={{ text: 'Create', style: { color: '#fff' } }}
-      />
-
+    <Layout>
       <View style={styles.pageContainer}>
         <Text>Create Page</Text>
 
@@ -26,7 +18,7 @@ export default function CreateSessionPage() {
           title="Go Home"
         />
       </View>
-    </View>
+    </Layout>
   );
 }
 
