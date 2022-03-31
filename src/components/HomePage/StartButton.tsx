@@ -11,7 +11,7 @@ export default function StartButton() {
 
   return (
     <Button
-      title="Begin"
+      title="Start"
       buttonStyle={{
         borderColor: 'white',
         borderWidth: 2,

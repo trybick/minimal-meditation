@@ -12,13 +12,13 @@ export default function OptionsContainer() {
 
   return (
     <View style={styles.optionsContainer}>
-      <View style={styles.chip}>
-        <Text style={styles.text}>Duration</Text>
-        <TouchableOpacity onPress={openDialog} style={styles.optionButton}>
-          <Text style={styles.text}>{duration}</Text>
+      <TouchableOpacity onPress={openDialog} style={styles.chip}>
+        <Text style={styles.optionText}>Duration</Text>
+        <View style={styles.currentSetting}>
+          <Text style={styles.optionText}>{duration}</Text>
           <Icon color="white" name="chevron-small-right" size={22} />
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
 
       <Dialog
         isVisible={isDurationDialogOpen}
@@ -63,13 +63,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
   },
-  text: {
+  optionText: {
     color: 'white',
     fontSize: 18,
     marginRight: 5,
   },
-  optionButton: {
+  currentSetting: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
   },
 });
