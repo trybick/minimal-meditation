@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
 
 export default function OptionsContainer() {

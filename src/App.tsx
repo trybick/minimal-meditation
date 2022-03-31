@@ -1,7 +1,7 @@
 import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';
-import { ThemeProvider } from 'react-native-elements';
+import { ThemeProvider } from '@rneui/themed';
 import { ROUTES } from 'utils/routes';
 import HomePage from 'components/HomePage/HomePage';
 import CreateSessionPage from 'components/CreateSessionPage';

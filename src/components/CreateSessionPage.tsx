@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { useHistory } from 'react-router-native';
-import { Button, Text } from 'react-native-elements';
+import { Button, Text } from '@rneui/base';
 import { ROUTES } from 'utils/routes';
 import Layout from 'components/common/Layout';
 
