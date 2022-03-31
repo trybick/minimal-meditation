@@ -26,5 +26,18 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 0,
     'react/jsx-filename-extension': 0,
     'no-use-before-define': 0,
+    'react/jsx-sort-props': [
+      1,
+      {
+        shorthandLast: true,
+      },
+    ],
+    'sort-imports': [
+      1,
+      {
+        ignoreCase: true,
+        ignoreDeclarationSort: true,
+      },
+    ],
   },
 };

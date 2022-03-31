@@ -28,18 +28,18 @@ export default function OptionsContainer() {
         <Dialog.Title title="Choose duration" />
         {durationOptions.map((option, i) => (
           <CheckBox
-            key={i}
-            title={option}
-            containerStyle={{ backgroundColor: 'white', borderWidth: 0 }}
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
             checked={duration === option}
+            checkedIcon="dot-circle-o"
+            containerStyle={{ backgroundColor: 'white', borderWidth: 0 }}
+            key={i}
             onPress={() => setDuration(option)}
+            title={option}
+            uncheckedIcon="circle-o"
           />
         ))}
         <Dialog.Actions>
-          <Dialog.Button title="CONFIRM" titleStyle={{ color: 'white' }} onPress={closeDialog} />
-          <Dialog.Button title="CANCEL" titleStyle={{ color: 'white' }} onPress={closeDialog} />
+          <Dialog.Button onPress={closeDialog} title="CONFIRM" titleStyle={{ color: 'white' }} />
+          <Dialog.Button onPress={closeDialog} title="CANCEL" titleStyle={{ color: 'white' }} />
         </Dialog.Actions>
       </Dialog>
     </View>

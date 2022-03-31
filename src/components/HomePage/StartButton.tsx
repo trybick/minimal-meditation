@@ -11,20 +11,20 @@ export default function StartButton() {
 
   return (
     <Button
-      title="Start"
       buttonStyle={{
         borderColor: 'white',
         borderWidth: 2,
         borderRadius: 10,
         height: 60,
       }}
-      type="outline"
-      titleStyle={{ color: 'white' }}
       containerStyle={{
         width: 200,
         marginTop: 60,
       }}
       onPress={onPressStart}
+      title="Start"
+      titleStyle={{ color: 'white' }}
+      type="outline"
     />
   );
 }

@@ -13,8 +13,8 @@ export default function App() {
         <BackButton />
         <StatusBar hidden />
         <Switch>
-          <Route exact path={ROUTES.HOME} component={HomePage} />
-          <Route exact path={ROUTES.TIMER} component={TimerPage} />
+          <Route component={HomePage} path={ROUTES.HOME} exact />
+          <Route component={TimerPage} path={ROUTES.TIMER} exact />
         </Switch>
       </NativeRouter>
     </ThemeProvider>
