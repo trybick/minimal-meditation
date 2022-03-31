@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     padding: 14,
     borderColor: 'white',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 10,
   },
   text: {
     color: 'white',
