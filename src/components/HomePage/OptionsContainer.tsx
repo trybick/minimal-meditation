@@ -34,7 +34,7 @@ export default function OptionsContainer() {
           <CheckBox
             checked={duration === option}
             checkedIcon="dot-circle-o"
-            containerStyle={{ backgroundColor: colors.primary }}
+            containerStyle={styles.checkboxContainer}
             key={i}
             onPress={() => onSelectOption(option)}
             title={option}
@@ -72,5 +72,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  checkboxContainer: {
+    backgroundColor: colors.primary,
   },
 });
