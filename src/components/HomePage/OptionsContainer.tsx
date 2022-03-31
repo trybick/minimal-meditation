@@ -2,22 +2,19 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
-
-const durationOptions = ['5:00', '10:00', '15:00'];
+import { defaultDuration, durationOptions } from 'utils/durationOptions';
 
 export default function OptionsContainer() {
-  const [duration, setDuration] = useState('10:00');
+  const [duration, setDuration] = useState(defaultDuration);
   const [isDurationDialogOpen, setIsDurationDialogOpen] = useState(false);
-
-  const onPressDuration = () => {
-    setIsDurationDialogOpen(true);
-  };
+  const openDialog = () => setIsDurationDialogOpen(true);
+  const closeDialog = () => setIsDurationDialogOpen(false);
 
   return (
     <View style={styles.optionsContainer}>
       <View style={styles.chip}>
         <Text style={styles.text}>Duration</Text>
-        <TouchableOpacity onPress={onPressDuration} style={styles.optionButton}>
+        <TouchableOpacity onPress={openDialog} style={styles.optionButton}>
           <Text style={styles.text}>{duration}</Text>
           <Icon color="white" name="chevron-small-right" size={22} />
         </TouchableOpacity>
@@ -25,7 +22,8 @@ export default function OptionsContainer() {
 
       <Dialog
         isVisible={isDurationDialogOpen}
-        onBackdropPress={() => setIsDurationDialogOpen(false)}
+        onBackdropPress={closeDialog}
+        overlayStyle={{ backgroundColor: 'white' }}
       >
         <Dialog.Title title="Choose duration" />
         {durationOptions.map((option, i) => (
@@ -40,8 +38,8 @@ export default function OptionsContainer() {
           />
         ))}
         <Dialog.Actions>
-          <Dialog.Button title="CONFIRM" onPress={() => setIsDurationDialogOpen(false)} />
-          <Dialog.Button title="CANCEL" onPress={() => setIsDurationDialogOpen(false)} />
+          <Dialog.Button title="CONFIRM" titleStyle={{ color: 'white' }} onPress={closeDialog} />
+          <Dialog.Button title="CANCEL" titleStyle={{ color: 'white' }} onPress={closeDialog} />
         </Dialog.Actions>
       </Dialog>
     </View>
