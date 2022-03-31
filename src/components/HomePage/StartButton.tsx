@@ -1,6 +1,7 @@
 import { Button } from '@rneui/base';
 import { useHistory } from 'react-router-native';
 import { ROUTES } from 'utils/routes';
+import colors from 'style/colors';
 
 export default function StartButton() {
   const history = useHistory();
@@ -12,7 +13,7 @@ export default function StartButton() {
   return (
     <Button
       buttonStyle={{
-        borderColor: 'white',
+        borderColor: colors.primary,
         borderWidth: 2,
         borderRadius: 10,
         height: 60,
@@ -23,7 +24,7 @@ export default function StartButton() {
       }}
       onPress={onPressStart}
       title="Start"
-      titleStyle={{ color: 'white' }}
+      titleStyle={{ color: colors.primary }}
       type="outline"
     />
   );

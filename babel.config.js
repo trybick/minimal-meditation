@@ -22,6 +22,7 @@ module.exports = function (api) {
             hooks: './src/hooks',
             utils: './src/utils',
             state: './src/state',
+            style: './src/style',
           },
         },
       ],

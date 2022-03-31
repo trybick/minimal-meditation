@@ -5,6 +5,7 @@ import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
 import { durationOptions } from 'utils/durationOptions';
 import { durationState } from 'state/atoms';
+import colors from 'style/colors';
 
 export default function OptionsContainer() {
   const [duration, setDuration] = useRecoilState(durationState);
@@ -23,7 +24,7 @@ export default function OptionsContainer() {
         <Text style={styles.optionText}>Duration</Text>
         <View style={styles.currentSetting}>
           <Text style={styles.optionText}>{duration}</Text>
-          <Icon color="white" name="chevron-small-right" size={22} />
+          <Icon color={colors.primary} name="chevron-small-right" size={22} />
         </View>
       </TouchableOpacity>
 
@@ -33,7 +34,7 @@ export default function OptionsContainer() {
           <CheckBox
             checked={duration === option}
             checkedIcon="dot-circle-o"
-            containerStyle={{ backgroundColor: 'white' }}
+            containerStyle={{ backgroundColor: colors.primary }}
             key={i}
             onPress={() => onSelectOption(option)}
             title={option}
@@ -58,12 +59,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     padding: 14,
-    borderColor: 'white',
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 10,
   },
   optionText: {
-    color: 'white',
+    color: colors.primary,
     fontSize: 18,
     marginRight: 5,
   },
