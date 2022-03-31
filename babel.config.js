@@ -18,10 +18,10 @@ module.exports = function (api) {
             '.ios.tsx',
           ],
           alias: {
-            database: './database',
             components: './src/components',
             hooks: './src/hooks',
             utils: './src/utils',
+            state: './src/state',
           },
         },
       ],

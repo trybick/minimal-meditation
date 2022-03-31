@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
-import { defaultDuration, durationOptions } from 'utils/durationOptions';
+import { durationOptions } from 'utils/durationOptions';
+import { durationState } from 'state/atoms';
 
 export default function OptionsContainer() {
-  const [duration, setDuration] = useState(defaultDuration);
+  const [duration, setDuration] = useRecoilState(durationState);
   const [isDurationDialogOpen, setIsDurationDialogOpen] = useState(false);
   const openDialog = () => setIsDurationDialogOpen(true);
   const closeDialog = () => setIsDurationDialogOpen(false);

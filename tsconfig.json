@@ -11,21 +11,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "database/*": [
-        "database/*"
-      ],
-      "components/*": [
-        "src/components/*"
-      ],
-      "hooks/*": [
-        "src/hooks/*"
-      ],
-      "utils/*": [
-        "src/utils/*"
-      ]
-    }
+    "baseUrl": "./src",
   },
   "include": [
     "."
