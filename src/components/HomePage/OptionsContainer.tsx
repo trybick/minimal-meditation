@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Text } from '@rneui/base';
+import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
+
+const durationOptions = ['5:00', '10:00', '15:00'];
 
 export default function OptionsContainer() {
   const [duration, setDuration] = useState('10:00');
+  const [isDurationDialogOpen, setIsDurationDialogOpen] = useState(false);
 
   const onPressDuration = () => {
-    // open new page or dialog
+    setIsDurationDialogOpen(true);
   };
 
   return (
@@ -19,6 +22,28 @@ export default function OptionsContainer() {
           <Icon color="white" name="chevron-small-right" size={22} />
         </TouchableOpacity>
       </View>
+
+      <Dialog
+        isVisible={isDurationDialogOpen}
+        onBackdropPress={() => setIsDurationDialogOpen(false)}
+      >
+        <Dialog.Title title="Choose duration" />
+        {durationOptions.map((option, i) => (
+          <CheckBox
+            key={i}
+            title={option}
+            containerStyle={{ backgroundColor: 'white', borderWidth: 0 }}
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            checked={duration === option}
+            onPress={() => setDuration(option)}
+          />
+        ))}
+        <Dialog.Actions>
+          <Dialog.Button title="CONFIRM" onPress={() => setIsDurationDialogOpen(false)} />
+          <Dialog.Button title="CANCEL" onPress={() => setIsDurationDialogOpen(false)} />
+        </Dialog.Actions>
+      </Dialog>
     </View>
   );
 }
