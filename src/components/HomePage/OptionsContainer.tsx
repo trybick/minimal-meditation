@@ -27,17 +27,13 @@ export default function OptionsContainer() {
         </View>
       </TouchableOpacity>
 
-      <Dialog
-        isVisible={isDurationDialogOpen}
-        onBackdropPress={closeDialog}
-        overlayStyle={{ backgroundColor: 'white' }}
-      >
+      <Dialog isVisible={isDurationDialogOpen} onBackdropPress={closeDialog}>
         <Dialog.Title title="Choose duration" />
         {durationOptions.map((option, i) => (
           <CheckBox
             checked={duration === option}
             checkedIcon="dot-circle-o"
-            containerStyle={{ backgroundColor: 'white', borderWidth: 0 }}
+            containerStyle={{ backgroundColor: 'white' }}
             key={i}
             onPress={() => onSelectOption(option)}
             title={option}

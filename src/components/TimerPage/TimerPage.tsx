@@ -21,7 +21,6 @@ export default function CreateSessionPage() {
 
 const styles = StyleSheet.create({
   pageContainer: {
-    backgroundColor: 'black',
     marginTop: 100,
     alignItems: 'center',
     justifyContent: 'center',
