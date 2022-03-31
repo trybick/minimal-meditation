@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Icon, Text } from 'react-native-elements';
+import { Text } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Entypo';
 
 export default function OptionsContainer() {
   const [duration, setDuration] = useState('10:00');
@@ -9,13 +10,10 @@ export default function OptionsContainer() {
     <View style={styles.optionsContainer}>
       <View style={styles.chip}>
         <Text style={styles.text}>Duration</Text>
-        <Text style={styles.text}>{duration}</Text>
-        <Icon
-          color="white"
-          name="chevron-small-right"
-          type="entypo"
-          tvParallaxProperties={undefined}
-        />
+        <View style={styles.optionButton}>
+          <Text style={styles.text}>{duration}</Text>
+          <Icon color="white" name="chevron-small-right" size={22} />
+        </View>
       </View>
     </View>
   );
@@ -41,5 +39,10 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 18,
+    marginRight: 5,
+  },
+  optionButton: {
+    display: 'flex',
+    flexDirection: 'row',
   },
 });
