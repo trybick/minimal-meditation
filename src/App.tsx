@@ -4,7 +4,7 @@ import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';
 import { ThemeProvider } from '@rneui/themed';
 import { ROUTES } from 'utils/routes';
 import HomePage from 'components/HomePage/HomePage';
-import CreateSessionPage from 'components/CreateSessionPage';
+import TimerPage from 'components/TimerPage/TimerPage';
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
         <StatusBar hidden />
         <Switch>
           <Route exact path={ROUTES.HOME} component={HomePage} />
-          <Route exact path={ROUTES.CREATE} component={CreateSessionPage} />
+          <Route exact path={ROUTES.TIMER} component={TimerPage} />
         </Switch>
       </NativeRouter>
     </ThemeProvider>
