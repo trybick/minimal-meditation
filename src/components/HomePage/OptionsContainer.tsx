@@ -1,19 +1,23 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
 export default function OptionsContainer() {
   const [duration, setDuration] = useState('10:00');
 
+  const onPressDuration = () => {
+    // open new page or dialog
+  };
+
   return (
     <View style={styles.optionsContainer}>
       <View style={styles.chip}>
         <Text style={styles.text}>Duration</Text>
-        <View style={styles.optionButton}>
+        <TouchableOpacity onPress={onPressDuration} style={styles.optionButton}>
           <Text style={styles.text}>{duration}</Text>
           <Icon color="white" name="chevron-small-right" size={22} />
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
