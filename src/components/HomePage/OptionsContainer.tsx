@@ -10,6 +10,11 @@ export default function OptionsContainer() {
   const openDialog = () => setIsDurationDialogOpen(true);
   const closeDialog = () => setIsDurationDialogOpen(false);
 
+  const onSelectOption = (option: string) => {
+    setDuration(option);
+    closeDialog();
+  };
+
   return (
     <View style={styles.optionsContainer}>
       <TouchableOpacity onPress={openDialog} style={styles.chip}>
@@ -32,15 +37,11 @@ export default function OptionsContainer() {
             checkedIcon="dot-circle-o"
             containerStyle={{ backgroundColor: 'white', borderWidth: 0 }}
             key={i}
-            onPress={() => setDuration(option)}
+            onPress={() => onSelectOption(option)}
             title={option}
             uncheckedIcon="circle-o"
           />
         ))}
-        <Dialog.Actions>
-          <Dialog.Button onPress={closeDialog} title="CONFIRM" titleStyle={{ color: 'white' }} />
-          <Dialog.Button onPress={closeDialog} title="CANCEL" titleStyle={{ color: 'white' }} />
-        </Dialog.Actions>
       </Dialog>
     </View>
   );
