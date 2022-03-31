@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Icon, Text } from 'react-native-elements';
 
 export default function OptionsContainer() {
   const [duration, setDuration] = useState('10:00');
@@ -10,6 +10,12 @@ export default function OptionsContainer() {
       <View style={styles.chip}>
         <Text style={styles.text}>Duration</Text>
         <Text style={styles.text}>{duration}</Text>
+        <Icon
+          color="white"
+          name="chevron-small-right"
+          type="entypo"
+          tvParallaxProperties={undefined}
+        />
       </View>
     </View>
   );
