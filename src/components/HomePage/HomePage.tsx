@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useBackButtonHandler } from 'hooks/useBackButtonHandler';
 import Layout from 'components/common/Layout';
+import OptionsContainer from './OptionsContainer';
 
 export default function HomePage() {
   useBackButtonHandler();
@@ -9,6 +10,7 @@ export default function HomePage() {
     <Layout>
       <View style={styles.pageContainer}>
         <Text style={styles.titleText}>minimal meditation</Text>
+        <OptionsContainer />
       </View>
     </Layout>
   );
@@ -17,7 +19,6 @@ export default function HomePage() {
 const styles = StyleSheet.create({
   pageContainer: {
     display: 'flex',
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 50,
