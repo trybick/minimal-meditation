@@ -7,7 +7,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "clean": "rm -rf node_modules && yarn"
+    "clean": "rm -rf node_modules && yarn",
+    "lint:check": "npm run types:check && eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0",
+    "lint:fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx",
+    "types:check": "tsc --noEmit"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.15.0",
