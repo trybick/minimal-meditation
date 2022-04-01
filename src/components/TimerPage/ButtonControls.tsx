@@ -16,16 +16,19 @@ export default function ButtonControls() {
     <View style={styles.buttonsContainer}>
       <AntIcon color={colors.primary} name="back" onPress={onPressBack} size={25} />
       <MaterialIcon color={colors.primary} name="pause" size={40} />
+      {/* This third icon is only here to take up a blank space so Pause icon is centered */}
+      <AntIcon color={colors.hidden} name="back" size={25} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   buttonsContainer: {
-    marginTop: 200,
+    marginTop: 500,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-    width: '90%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
   },
 });
