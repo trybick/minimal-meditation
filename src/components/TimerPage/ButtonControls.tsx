@@ -5,7 +5,13 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import { ROUTES } from 'utils/routes';
 import colors from 'style/colors';
 
-export default function ButtonControls() {
+export default function ButtonControls({
+  isCountingDown,
+  onPressPause,
+}: {
+  isCountingDown: boolean;
+  onPressPause: () => void;
+}) {
   const history = useHistory();
 
   const onPressBack = () => {
@@ -15,7 +21,12 @@ export default function ButtonControls() {
   return (
     <View style={styles.buttonsContainer}>
       <AntIcon color={colors.primary} name="back" onPress={onPressBack} size={25} />
-      <MaterialIcon color={colors.primary} name="pause" size={40} />
+      <MaterialIcon
+        color={colors.primary}
+        name={isCountingDown ? 'pause' : 'play'}
+        onPress={onPressPause}
+        size={40}
+      />
       {/* This third icon is only here to take up a blank space so Pause icon is centered */}
       <AntIcon color={colors.hidden} name="back" size={25} />
     </View>

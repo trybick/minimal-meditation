@@ -18,6 +18,7 @@ export default function TimerPage() {
   const secondsInSelectedDuration = useRecoilValue(selectSecondsInSelectedDuration);
   const [secondsRemaining, setSecondsRemaining] = useState(secondsInSelectedDuration);
   const [isBackgroundTaskEnabled, setIsBackgroundTaskEnabled] = useState(true);
+  const [isCountingDown, setIsCoutingDown] = useState(true);
 
   useEffect(() => {
     const recordStartTime = async () => {
@@ -26,14 +27,17 @@ export default function TimerPage() {
     recordStartTime();
   }, []);
 
-  const playEndingSound = () => {
+  const stopTimer = () => {
     playSound(endingSound);
     setIsBackgroundTaskEnabled(false);
   };
 
   const updateTimerProgress = async () => {
+    if (!isCountingDown) {
+      return;
+    }
     if (secondsRemaining <= 0) {
-      return playEndingSound();
+      return stopTimer();
     }
     const startTime = await AsyncStorage.getItem(STORAGE_KEYS.START_TIME);
     const secondsSinceStart = differenceInSeconds(new Date(), Date.parse(startTime!));
@@ -41,11 +45,15 @@ export default function TimerPage() {
     setSecondsRemaining(updatedSecondsRemaining);
   };
 
+  const onPressPause = () => {
+    setIsCoutingDown(prev => !prev);
+  };
+
   return (
     <Layout>
       <View style={styles.pageContainer}>
         <Text style={styles.text}>{convertSecondsToClockTime(secondsRemaining)}</Text>
-        <ButtonControls />
+        <ButtonControls isCountingDown={isCountingDown} onPressPause={onPressPause} />
 
         {isBackgroundTaskEnabled && (
           <BackgroundTask functionToRun={updateTimerProgress} interval={1000} />
