@@ -26,6 +26,8 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 0,
     'react/jsx-filename-extension': 0,
     'no-use-before-define': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
+    '@typescript-eslint/ban-ts-comment': 0,
     'react/jsx-sort-props': [
       1,
       {

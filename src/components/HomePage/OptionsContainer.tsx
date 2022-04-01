@@ -3,18 +3,18 @@ import { useRecoilState } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
-import { durationOptions } from 'utils/durationOptions';
-import { durationState } from 'state/atoms';
+import { durationsInTimestamps } from 'utils/durationOptions';
+import { selectedMeditationDurationState } from 'state/atoms';
 import colors from 'style/colors';
 
 export default function OptionsContainer() {
-  const [duration, setDuration] = useRecoilState(durationState);
+  const [selectedDuration, setSelectedDuration] = useRecoilState(selectedMeditationDurationState);
   const [isDurationDialogOpen, setIsDurationDialogOpen] = useState(false);
   const openDialog = () => setIsDurationDialogOpen(true);
   const closeDialog = () => setIsDurationDialogOpen(false);
 
   const onSelectOption = (option: string) => {
-    setDuration(option);
+    setSelectedDuration(option);
     closeDialog();
   };
 
@@ -23,21 +23,21 @@ export default function OptionsContainer() {
       <TouchableOpacity onPress={openDialog} style={styles.chip}>
         <Text style={styles.optionText}>Duration</Text>
         <View style={styles.currentSetting}>
-          <Text style={styles.optionText}>{duration}</Text>
+          <Text style={styles.optionText}>{selectedDuration}</Text>
           <Icon color={colors.primary} name="chevron-small-right" size={22} />
         </View>
       </TouchableOpacity>
 
       <Dialog isVisible={isDurationDialogOpen} onBackdropPress={closeDialog}>
         <Dialog.Title title="Choose duration" />
-        {durationOptions.map((option, i) => (
+        {durationsInTimestamps.map((timestamp, i) => (
           <CheckBox
-            checked={duration === option}
+            checked={selectedDuration === timestamp}
             checkedIcon="dot-circle-o"
             containerStyle={styles.checkboxContainer}
             key={i}
-            onPress={() => onSelectOption(option)}
-            title={option}
+            onPress={() => onSelectOption(timestamp)}
+            title={timestamp}
             uncheckedIcon="circle-o"
           />
         ))}

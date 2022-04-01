@@ -1,19 +1,55 @@
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { StyleSheet, View } from 'react-native';
-import { useHistory } from 'react-router-native';
-import { Button } from '@rneui/base';
-import { ROUTES } from 'utils/routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Text } from '@rneui/base';
+import { differenceInSeconds } from 'date-fns';
+import { endingSoundState, selectSecondsInSelectedDuration } from 'state/atoms';
+import BackgroundTask from 'components/common/BackgroundTask';
+import { STORAGE_KEYS } from 'utils/storage';
+import { convertSecondsToClockTime } from 'utils/time';
+import { playSound } from 'utils/soundPlayer';
+import colors from 'style/colors';
 import Layout from 'components/common/Layout';
-import { durationState } from 'state/atoms';
+import ButtonControls from './ButtonControls';
 
-export default function CreateSessionPage() {
-  const history = useHistory();
-  const duration = useRecoilValue(durationState);
+export default function TimerPage() {
+  const endingSound = useRecoilValue(endingSoundState);
+  const secondsInSelectedDuration = useRecoilValue(selectSecondsInSelectedDuration);
+  const [secondsRemaining, setSecondsRemaining] = useState(secondsInSelectedDuration);
+  const [isBackgroundTaskEnabled, setIsBackgroundTaskEnabled] = useState(true);
+
+  useEffect(() => {
+    const recordStartTime = async () => {
+      await AsyncStorage.setItem(STORAGE_KEYS.START_TIME, new Date().toISOString());
+    };
+    recordStartTime();
+  }, []);
+
+  const playEndingSound = () => {
+    playSound(endingSound);
+    setIsBackgroundTaskEnabled(false);
+  };
+
+  const updateTimerProgress = async () => {
+    if (secondsRemaining <= 0) {
+      return playEndingSound();
+    }
+    const startTime = await AsyncStorage.getItem(STORAGE_KEYS.START_TIME);
+    const secondsSinceStart = differenceInSeconds(new Date(), Date.parse(startTime!));
+    const updatedSecondsRemaining = secondsInSelectedDuration - secondsSinceStart;
+    setSecondsRemaining(updatedSecondsRemaining);
+  };
 
   return (
     <Layout>
       <View style={styles.pageContainer}>
-        <Button onPress={() => history.push(ROUTES.HOME)} title="Exit" />
+        <Text style={styles.text}>{convertSecondsToClockTime(secondsRemaining)}</Text>
+        <ButtonControls />
+
+        {isBackgroundTaskEnabled && (
+          <BackgroundTask functionToRun={updateTimerProgress} interval={1000} />
+        )}
       </View>
     </Layout>
   );
@@ -24,5 +60,10 @@ const styles = StyleSheet.create({
     marginTop: 100,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    color: colors.primary,
+    fontSize: 22,
+    marginTop: 100,
   },
 });
