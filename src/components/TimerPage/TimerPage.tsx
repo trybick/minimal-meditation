@@ -27,7 +27,7 @@ export default function TimerPage() {
     recordStartTime();
   }, []);
 
-  const stopTimer = () => {
+  const endTimer = () => {
     playSound(endingSound);
     setIsBackgroundTaskEnabled(false);
   };
@@ -37,7 +37,7 @@ export default function TimerPage() {
       return;
     }
     if (secondsRemaining <= 0) {
-      return stopTimer();
+      return endTimer();
     }
     const startTime = await AsyncStorage.getItem(STORAGE_KEYS.START_TIME);
     const secondsSinceStart = differenceInSeconds(new Date(), Date.parse(startTime!));
