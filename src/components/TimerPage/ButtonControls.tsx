@@ -7,10 +7,12 @@ import colors from 'style/colors';
 
 export default function ButtonControls({
   isCountingDown,
+  isTimerEnded,
   onPressPause,
   onPressResume,
 }: {
   isCountingDown: boolean;
+  isTimerEnded: boolean;
   onPressPause: () => void;
   onPressResume: () => void;
 }) {
@@ -24,7 +26,7 @@ export default function ButtonControls({
     <View style={styles.buttonsContainer}>
       <AntIcon color={colors.primary} name="back" onPress={onPressBack} size={25} />
       <MaterialIcon
-        color={colors.primary}
+        color={isTimerEnded ? colors.hidden : colors.primary}
         name={isCountingDown ? 'pause' : 'play'}
         onPress={isCountingDown ? onPressPause : onPressResume}
         size={40}

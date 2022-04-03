@@ -30,8 +30,9 @@ export default function TimerPage() {
   };
 
   const endTimer = () => {
-    playSound(endingSound);
+    setSecondsRemaining(0);
     setIsBackgroundTaskEnabled(false);
+    playSound(endingSound);
   };
 
   const getSecondsSinceStart = async () => {
@@ -43,7 +44,7 @@ export default function TimerPage() {
     if (!isCountingDown) {
       return;
     }
-    if (secondsRemaining <= 0) {
+    if (secondsRemaining <= 1) {
       return endTimer();
     }
     const secondsSinceStart = await getSecondsSinceStart();
@@ -70,6 +71,7 @@ export default function TimerPage() {
         <Text style={styles.text}>{convertSecondsToClockTime(secondsRemaining)}</Text>
         <ButtonControls
           isCountingDown={isCountingDown}
+          isTimerEnded={secondsRemaining === 0}
           onPressPause={onPressPause}
           onPressResume={onPressResume}
         />
