@@ -8,9 +8,11 @@ import colors from 'style/colors';
 export default function ButtonControls({
   isCountingDown,
   onPressPause,
+  onPressResume,
 }: {
   isCountingDown: boolean;
   onPressPause: () => void;
+  onPressResume: () => void;
 }) {
   const history = useHistory();
 
@@ -24,7 +26,7 @@ export default function ButtonControls({
       <MaterialIcon
         color={colors.primary}
         name={isCountingDown ? 'pause' : 'play'}
-        onPress={onPressPause}
+        onPress={isCountingDown ? onPressPause : onPressResume}
         size={40}
       />
       {/* This third icon is only here to take up a blank space so Pause icon is centered */}
