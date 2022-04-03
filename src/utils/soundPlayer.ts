@@ -28,8 +28,5 @@ export function unloadSounds() {
 }
 
 export async function playSound(name: string) {
-  if (loadedSounds[name]) {
-    console.log('playing sound:', name);
-    await loadedSounds[name].replayAsync().catch(console.warn);
-  }
+  await loadedSounds[name]?.replayAsync().catch(console.warn);
 }

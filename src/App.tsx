@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { LogBox } from 'react-native';
+import { Suspense, useEffect } from 'react';
+import { LogBox, View } from 'react-native';
 import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';
 import { RecoilRoot } from 'recoil';
 import { registerRootComponent } from 'expo';
@@ -19,16 +19,20 @@ export default function App() {
 
   return (
     <RecoilRoot>
-      <ThemeProvider>
-        <NativeRouter>
-          <BackButton />
-          <StatusBar hidden />
-          <Switch>
-            <Route component={HomePage} path={ROUTES.HOME} exact />
-            <Route component={TimerPage} path={ROUTES.TIMER} exact />
-          </Switch>
-        </NativeRouter>
-      </ThemeProvider>
+      <Suspense
+        fallback={<View style={{ backgroundColor: 'black', height: '100%', width: '100%' }} />}
+      >
+        <ThemeProvider>
+          <NativeRouter>
+            <BackButton />
+            <StatusBar hidden />
+            <Switch>
+              <Route component={HomePage} path={ROUTES.HOME} exact />
+              <Route component={TimerPage} path={ROUTES.TIMER} exact />
+            </Switch>
+          </NativeRouter>
+        </ThemeProvider>
+      </Suspense>
     </RecoilRoot>
   );
 }

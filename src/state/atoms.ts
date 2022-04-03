@@ -1,18 +1,20 @@
 import { atom, selector } from 'recoil';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DEFAULT_DURATION, DURATIONS } from 'utils/durationOptions';
-
-export const selectedMeditationDurationState = atom({
-  key: 'selectedMeditationDurationState',
-  default: DEFAULT_DURATION,
-});
+import { STORAGE } from 'utils/storage';
 
 export const selectSecondsInSelectedDuration = selector({
   key: 'secondsInSelectedDuration',
-  get: ({ get }) => {
-    const timestampDuration = get(selectedMeditationDurationState);
+  get: async () => {
+    const defaultDuration = await AsyncStorage.getItem(STORAGE.DEFAULT_DURATION);
     // @ts-ignore
-    return DURATIONS[timestampDuration];
+    return DURATIONS[defaultDuration] || DEFAULT_DURATION;
   },
+});
+
+export const selectDefaultTimestampDuration = selector({
+  key: 'defaultTimestampDuration',
+  get: async () => (await AsyncStorage.getItem(STORAGE.DEFAULT_DURATION)) || DEFAULT_DURATION,
 });
 
 export const endingSoundState = atom({

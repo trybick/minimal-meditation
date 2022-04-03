@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
+import { selectDefaultTimestampDuration } from 'state/atoms';
 import { durationsInTimestamps } from 'utils/durationOptions';
-import { selectedMeditationDurationState } from 'state/atoms';
+import { STORAGE } from 'utils/storage';
 import colors from 'style/colors';
 
 export default function OptionsContainer() {
-  const [selectedDuration, setSelectedDuration] = useRecoilState(selectedMeditationDurationState);
+  const [selectedDuration, setSelectedDuration] = useState('');
+  const defaultTimestampDuration = useRecoilValue(selectDefaultTimestampDuration);
   const [isDurationDialogOpen, setIsDurationDialogOpen] = useState(false);
   const openDialog = () => setIsDurationDialogOpen(true);
   const closeDialog = () => setIsDurationDialogOpen(false);
 
-  const onSelectOption = (option: string) => {
+  const onSelectOption = async (option: string) => {
     setSelectedDuration(option);
     closeDialog();
+    await AsyncStorage.setItem(STORAGE.DEFAULT_DURATION, option);
   };
 
   return (
@@ -23,7 +27,7 @@ export default function OptionsContainer() {
       <TouchableOpacity onPress={openDialog} style={styles.chip}>
         <Text style={styles.optionText}>Duration</Text>
         <View style={styles.currentSetting}>
-          <Text style={styles.optionText}>{selectedDuration}</Text>
+          <Text style={styles.optionText}>{selectedDuration || defaultTimestampDuration}</Text>
           <Icon color={colors.primary} name="chevron-small-right" size={22} />
         </View>
       </TouchableOpacity>
