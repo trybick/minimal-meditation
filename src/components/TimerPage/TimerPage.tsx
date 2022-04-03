@@ -22,15 +22,21 @@ export default function TimerPage() {
   const [storedSeconds, setStoredSeconds] = useState(0);
 
   useEffect(() => {
-    const recordStartTime = async () => {
-      await AsyncStorage.setItem(STORAGE.START_TIME, new Date().toISOString());
-    };
-    recordStartTime();
+    setStartTime();
   }, []);
+
+  const setStartTime = async () => {
+    await AsyncStorage.setItem(STORAGE.START_TIME, new Date().toISOString());
+  };
 
   const endTimer = () => {
     playSound(endingSound);
     setIsBackgroundTaskEnabled(false);
+  };
+
+  const getSecondsSinceStart = async () => {
+    const startTime = await AsyncStorage.getItem(STORAGE.START_TIME);
+    return differenceInSeconds(new Date(), Date.parse(startTime!));
   };
 
   const updateTimerProgress = async () => {
@@ -40,16 +46,14 @@ export default function TimerPage() {
     if (secondsRemaining <= 0) {
       return endTimer();
     }
-    const startTime = await AsyncStorage.getItem(STORAGE.START_TIME);
-    const secondsSinceStart = differenceInSeconds(new Date(), Date.parse(startTime!));
+    const secondsSinceStart = await getSecondsSinceStart();
     const updatedSecondsRemaining = secondsInSelectedDuration - storedSeconds - secondsSinceStart;
     setSecondsRemaining(updatedSecondsRemaining);
   };
 
   const onPressPause = async () => {
     setIsCoutingDown(false);
-    const startTime = await AsyncStorage.getItem(STORAGE.START_TIME);
-    const secondsSinceStart = differenceInSeconds(new Date(), Date.parse(startTime!));
+    const secondsSinceStart = await getSecondsSinceStart();
     await AsyncStorage.setItem(STORAGE.STORED_SECONDS, String(secondsSinceStart));
   };
 
@@ -57,7 +61,7 @@ export default function TimerPage() {
     setIsCoutingDown(true);
     const storedSeconds = await AsyncStorage.getItem(STORAGE.STORED_SECONDS);
     setStoredSeconds(prev => prev + +storedSeconds!);
-    await AsyncStorage.setItem(STORAGE.START_TIME, new Date().toISOString());
+    setStartTime();
   };
 
   return (
