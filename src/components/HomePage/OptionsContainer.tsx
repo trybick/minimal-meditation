@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
-import { selectDefaultTimestampDuration } from 'state/atoms';
+import { selectDefaultTimestampDuration } from 'state/duration';
 import { durationsInTimestamps } from 'utils/durationOptions';
 import { STORAGE } from 'utils/storage';
 import colors from 'style/colors';

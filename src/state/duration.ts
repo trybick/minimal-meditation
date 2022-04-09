@@ -16,8 +16,3 @@ export const selectDefaultTimestampDuration = selector({
   key: 'defaultTimestampDuration',
   get: async () => (await AsyncStorage.getItem(STORAGE.DEFAULT_DURATION)) || DEFAULT_DURATION,
 });
-
-export const endingSoundState = atom({
-  key: 'endingSoundState',
-  default: 'bell1',
-});
