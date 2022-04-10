@@ -4,14 +4,14 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
-import { timerDurationState } from 'state/duration';
+import { selectTimerDuration } from 'state/duration';
 import { durationsEntries } from 'utils/durationOptions';
 import { STORAGE } from 'utils/storage';
+import { convertSecondsToClockTime } from 'utils/time';
 import colors from 'style/colors';
-import { convertSecondsToClockTime } from '../../utils/time';
 
 export default function OptionsContainer() {
-  const [timerDuration, setTimerDuration] = useRecoilState(timerDurationState);
+  const [timerDuration, setTimerDuration] = useRecoilState(selectTimerDuration);
   const [isDurationDialogOpen, setIsDurationDialogOpen] = useState(false);
   const openDialog = () => setIsDurationDialogOpen(true);
   const closeDialog = () => setIsDurationDialogOpen(false);

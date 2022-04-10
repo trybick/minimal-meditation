@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text } from '@rneui/base';
 import { differenceInSeconds } from 'date-fns';
-import { timerDurationState } from 'state/duration';
+import { selectTimerDuration } from 'state/duration';
 import { endingSoundState } from 'state/settings';
 import BackgroundTask from 'components/common/BackgroundTask';
 import { STORAGE } from 'utils/storage';
@@ -16,7 +16,7 @@ import ButtonControls from './ButtonControls';
 
 export default function TimerPage() {
   const endingSound = useRecoilValue(endingSoundState);
-  const timerDuration = useRecoilValue(timerDurationState);
+  const timerDuration = useRecoilValue(selectTimerDuration);
   const [secondsRemaining, setSecondsRemaining] = useState(timerDuration);
   const [isBackgroundTaskEnabled, setIsBackgroundTaskEnabled] = useState(true);
   const [isCountingDown, setIsCoutingDown] = useState(true);
