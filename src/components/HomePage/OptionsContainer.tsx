@@ -5,9 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
 import { selectTimerDuration } from 'state/duration';
-import { durationsEntries } from 'utils/durationOptions';
+import { convertDurationSecondsToTimestamp, durationsEntries } from 'utils/durationOptions';
 import { STORAGE } from 'utils/storage';
-import { convertSecondsToClockTime } from 'utils/time';
 import colors from 'style/colors';
 
 export default function OptionsContainer() {
@@ -27,7 +26,7 @@ export default function OptionsContainer() {
       <TouchableOpacity onPress={openDialog} style={styles.chip}>
         <Text style={styles.optionText}>Duration</Text>
         <View style={styles.currentSetting}>
-          <Text style={styles.optionText}>{convertSecondsToClockTime(timerDuration)}</Text>
+          <Text style={styles.optionText}>{convertDurationSecondsToTimestamp(timerDuration)}</Text>
           <Icon color={colors.primary} name="chevron-small-right" size={22} />
         </View>
       </TouchableOpacity>
