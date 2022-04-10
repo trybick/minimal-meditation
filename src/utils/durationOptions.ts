@@ -17,8 +17,3 @@ export const durationsInTimestamps = Object.keys(DURATIONS);
 export const durationsEntries = Object.entries(DURATIONS);
 
 export type DurationTimestamp = keyof typeof DURATIONS;
-
-export const convertDurationSecondsToTimestamp = (durationSeconds: number) =>
-  durationsInTimestamps.find(
-    timestamp => DURATIONS[timestamp as DurationTimestamp] === durationSeconds
-  );
