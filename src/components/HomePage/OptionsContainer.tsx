@@ -38,10 +38,12 @@ export default function OptionsContainer() {
     }
   };
 
-  const onCustomDurationSubmit = () => {
+  const onCustomDurationSubmit = async () => {
     const customDurationToSet = convertMinutesToSeconds(+customDuration);
     setTimerDuration(customDurationToSet);
     closeCustomDurationDialog();
+    await AsyncStorage.setItem(STORAGE.SAVED_DURATION, String(customDurationToSet));
+    setCustomDuration('');
   };
 
   return (
@@ -93,7 +95,7 @@ export default function OptionsContainer() {
           value={customDuration}
         />
         <Dialog.Actions>
-          <Dialog.Button onPress={onCustomDurationSubmit} title="SUBMIT" />
+          <Dialog.Button onPress={onCustomDurationSubmit} title="ENTER" />
           <Dialog.Button onPress={closeCustomDurationDialog} title="CANCEL" />
         </Dialog.Actions>
       </Dialog>
