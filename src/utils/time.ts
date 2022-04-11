@@ -5,3 +5,5 @@ export const convertSecondsToClockTime = (secondsRemaining: number) => {
   const secondsForDisplay = seconds < 10 ? `0${seconds}` : seconds;
   return `${minutesForDisplay}:${secondsForDisplay}`;
 };
+
+export const convertMinutesToSeconds = (minutes: number) => minutes * 60;
