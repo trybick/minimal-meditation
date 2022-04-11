@@ -33,7 +33,9 @@ export default function OptionsContainer() {
   };
 
   const onCustomDurationChange = (duration: string) => {
-    if (numberRegex.test(duration)) {
+    if (!duration) {
+      setCustomDuration('');
+    } else if (numberRegex.test(duration)) {
       setCustomDuration(duration);
     }
   };
