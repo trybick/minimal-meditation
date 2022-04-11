@@ -89,6 +89,7 @@ export default function OptionsContainer() {
       >
         <Dialog.Title title="Custom Duration" />
         <Input
+          inputStyle={styles.customDurationInput}
           onChangeText={onCustomDurationChange}
           placeholder="Duration in minutes"
           shake={() => null}
@@ -132,5 +133,8 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     backgroundColor: colors.primary,
+  },
+  customDurationInput: {
+    color: 'white',
   },
 });
