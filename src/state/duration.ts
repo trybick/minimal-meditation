@@ -15,7 +15,5 @@ export const selectTimerDuration = selector<number>({
     const savedDuration = await AsyncStorage.getItem(STORAGE.SAVED_DURATION);
     return durationInState || Number(savedDuration) || DEFAULT_DURATION;
   },
-  set: ({ set }, duration) => {
-    set(timerDurationState, duration);
-  },
+  set: ({ set }, duration) => set(timerDurationState, duration),
 });

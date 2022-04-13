@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Input, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
 import { selectTimerDuration } from 'state/duration';
-import { endingSoundState } from 'state/settings';
+import { selectEndingSound } from 'state/settings';
 import { durationsEntries } from 'utils/durationOptions';
 import { convertMinutesToSeconds, convertSecondsToClockTime } from 'utils/time';
 import { STORAGE } from 'utils/storage';
@@ -15,11 +15,11 @@ import colors from 'style/colors';
 
 export default function OptionsContainer() {
   const [timerDuration, setTimerDuration] = useRecoilState(selectTimerDuration);
+  const [endingSound, setEndingSound] = useRecoilState(selectEndingSound);
   const [isDurationOptionsDialogOpen, setIsDurationOptionsDialogOpen] = useState(false);
   const [isCustomDurationDialogOpen, setIsCustomDurationDialogOpen] = useState(false);
   const [isEndingSoundDialogOpen, setIsEndingSoundDialogOpen] = useState(false);
   const [customDuration, setCustomDuration] = useState('');
-  const [endingSound, setEndingSound] = useRecoilState(endingSoundState);
   const openDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(true);
   const closeDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(false);
   const openCustomDurationDialog = () => setIsCustomDurationDialogOpen(true);
