@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Input, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
 import { selectTimerDuration } from 'state/duration';
+import { endingSoundState } from 'state/settings';
 import { durationsEntries } from 'utils/durationOptions';
 import { convertMinutesToSeconds, convertSecondsToClockTime } from 'utils/time';
 import { STORAGE } from 'utils/storage';
@@ -15,11 +16,15 @@ export default function OptionsContainer() {
   const [timerDuration, setTimerDuration] = useRecoilState(selectTimerDuration);
   const [isDurationOptionsDialogOpen, setIsDurationOptionsDialogOpen] = useState(false);
   const [isCustomDurationDialogOpen, setIsCustomDurationDialogOpen] = useState(false);
+  const [isEndingSoundDialogOpen, setIsEndingSoundDialogOpen] = useState(false);
   const [customDuration, setCustomDuration] = useState('');
+  const [endingSound, setEndingSound] = useRecoilState(endingSoundState);
   const openDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(true);
   const closeDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(false);
   const openCustomDurationDialog = () => setIsCustomDurationDialogOpen(true);
   const closeCustomDurationDialog = () => setIsCustomDurationDialogOpen(false);
+  const openEndingSoundDialog = () => setIsEndingSoundDialogOpen(true);
+  const closeEndingSoundDialog = () => setIsEndingSoundDialogOpen(false);
 
   const onSelectOption = async (option: number) => {
     setTimerDuration(option);
@@ -50,7 +55,7 @@ export default function OptionsContainer() {
 
   return (
     <View style={styles.optionsContainer}>
-      <TouchableOpacity onPress={openDurationOptionsDialog} style={styles.chip}>
+      <TouchableOpacity onPress={openDurationOptionsDialog} style={styles.optionContainer}>
         <Text style={styles.optionText}>Duration</Text>
         <View style={styles.currentSetting}>
           <Text style={styles.optionText}>{convertSecondsToClockTime(timerDuration)}</Text>
@@ -58,8 +63,15 @@ export default function OptionsContainer() {
         </View>
       </TouchableOpacity>
 
+      <TouchableOpacity onPress={openEndingSoundDialog} style={styles.optionContainer}>
+        <Text style={styles.optionText}>Ending Sound</Text>
+        <View style={styles.currentSetting}>
+          <Text style={styles.optionText}>{endingSound}</Text>
+          <Icon color={colors.primary} name="chevron-small-right" size={22} />
+        </View>
+      </TouchableOpacity>
+
       <Dialog isVisible={isDurationOptionsDialogOpen} onBackdropPress={closeDurationOptionsDialog}>
-        <Dialog.Title title="Choose duration" />
         {durationsEntries.map(([timestamp, seconds], i) => (
           <CheckBox
             checked={timerDuration === seconds}
@@ -89,12 +101,7 @@ export default function OptionsContainer() {
         </Dialog.Actions>
       </Dialog>
 
-      <Dialog
-        isVisible={isCustomDurationDialogOpen}
-        onBackdropPress={() => setIsCustomDurationDialogOpen(false)}
-        overlayStyle={{ backgroundColor: 'red !important' }}
-      >
-        <Dialog.Title title="Custom Duration" />
+      <Dialog isVisible={isCustomDurationDialogOpen} onBackdropPress={closeCustomDurationDialog}>
         <Input
           inputStyle={styles.colorWhite}
           onChangeText={onCustomDurationChange}
@@ -115,6 +122,21 @@ export default function OptionsContainer() {
           />
         </Dialog.Actions>
       </Dialog>
+
+      <Dialog isVisible={isEndingSoundDialogOpen} onBackdropPress={closeEndingSoundDialog}>
+        <Dialog.Actions>
+          <Dialog.Button
+            onPress={openEndingSoundDialog}
+            title="ENTER"
+            titleStyle={styles.colorWhite}
+          />
+          <Dialog.Button
+            onPress={closeEndingSoundDialog}
+            title="CANCEL"
+            titleStyle={styles.colorWhite}
+          />
+        </Dialog.Actions>
+      </Dialog>
     </View>
   );
 }
@@ -122,15 +144,18 @@ export default function OptionsContainer() {
 const styles = StyleSheet.create({
   optionsContainer: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    alignItems: 'center',
     marginTop: 400,
+    width: '100%',
   },
-  chip: {
+  optionContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '80%',
+    marginBottom: 24,
     padding: 14,
     borderColor: colors.primary,
     borderWidth: 1,
