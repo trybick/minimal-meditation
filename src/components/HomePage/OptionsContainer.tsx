@@ -81,25 +81,38 @@ export default function OptionsContainer() {
           uncheckedIcon="circle-o"
         />
         <Dialog.Actions>
-          <Dialog.Button onPress={closeDurationOptionsDialog} title="CANCEL" />
+          <Dialog.Button
+            onPress={closeDurationOptionsDialog}
+            title="CANCEL"
+            titleStyle={styles.colorWhite}
+          />
         </Dialog.Actions>
       </Dialog>
 
       <Dialog
         isVisible={isCustomDurationDialogOpen}
         onBackdropPress={() => setIsCustomDurationDialogOpen(false)}
+        overlayStyle={{ backgroundColor: 'red !important' }}
       >
         <Dialog.Title title="Custom Duration" />
         <Input
-          inputStyle={styles.customDurationInput}
+          inputStyle={styles.colorWhite}
           onChangeText={onCustomDurationChange}
           placeholder="Duration in minutes"
           shake={() => null}
           value={customDuration}
         />
         <Dialog.Actions>
-          <Dialog.Button onPress={onCustomDurationSubmit} title="ENTER" />
-          <Dialog.Button onPress={closeCustomDurationDialog} title="CANCEL" />
+          <Dialog.Button
+            onPress={onCustomDurationSubmit}
+            title="ENTER"
+            titleStyle={styles.colorWhite}
+          />
+          <Dialog.Button
+            onPress={closeCustomDurationDialog}
+            title="CANCEL"
+            titleStyle={styles.colorWhite}
+          />
         </Dialog.Actions>
       </Dialog>
     </View>
@@ -136,7 +149,7 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     backgroundColor: colors.primary,
   },
-  customDurationInput: {
+  colorWhite: {
     color: 'white',
   },
 });
