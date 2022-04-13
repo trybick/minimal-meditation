@@ -10,6 +10,7 @@ import { durationsEntries } from 'utils/durationOptions';
 import { convertMinutesToSeconds, convertSecondsToClockTime } from 'utils/time';
 import { STORAGE } from 'utils/storage';
 import { numberRegex } from 'utils/regex';
+import { EndingSoundOption, endingSoundOptions } from 'utils/soundLibrary';
 import colors from 'style/colors';
 
 export default function OptionsContainer() {
@@ -26,7 +27,7 @@ export default function OptionsContainer() {
   const openEndingSoundDialog = () => setIsEndingSoundDialogOpen(true);
   const closeEndingSoundDialog = () => setIsEndingSoundDialogOpen(false);
 
-  const onSelectOption = async (option: number) => {
+  const onSelectDurationOption = async (option: number) => {
     setTimerDuration(option);
     closeDurationOptionsDialog();
     await AsyncStorage.setItem(STORAGE.SAVED_DURATION, String(option));
@@ -53,6 +54,12 @@ export default function OptionsContainer() {
     setCustomDuration('');
   };
 
+  const onSelectEndingSoundOption = async (option: EndingSoundOption) => {
+    setEndingSound(option);
+    closeEndingSoundDialog();
+    await AsyncStorage.setItem(STORAGE.ENDING_SOUND, option);
+  };
+
   return (
     <View style={styles.optionsContainer}>
       <TouchableOpacity onPress={openDurationOptionsDialog} style={styles.optionContainer}>
@@ -77,8 +84,8 @@ export default function OptionsContainer() {
             checked={timerDuration === seconds}
             checkedIcon="dot-circle-o"
             containerStyle={styles.checkboxContainer}
-            key={i}
-            onPress={() => onSelectOption(seconds)}
+            key={`duration-option-${i}`}
+            onPress={() => onSelectDurationOption(seconds)}
             title={timestamp}
             uncheckedIcon="circle-o"
           />
@@ -124,6 +131,17 @@ export default function OptionsContainer() {
       </Dialog>
 
       <Dialog isVisible={isEndingSoundDialogOpen} onBackdropPress={closeEndingSoundDialog}>
+        {endingSoundOptions.map((sound, i) => (
+          <CheckBox
+            checked={endingSound === sound}
+            checkedIcon="dot-circle-o"
+            containerStyle={styles.checkboxContainer}
+            key={`ending-sound-${i}`}
+            onPress={() => onSelectEndingSoundOption(sound)}
+            title={sound}
+            uncheckedIcon="circle-o"
+          />
+        ))}
         <Dialog.Actions>
           <Dialog.Button
             onPress={openEndingSoundDialog}
