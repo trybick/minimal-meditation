@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CheckBox, Dialog, Input, Text } from '@rneui/base';
+import { CheckBox, Dialog, Input, Icon as RNEIcon, Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
 import { selectTimerDuration } from 'state/duration';
 import { selectEndingSound } from 'state/settings';
@@ -82,12 +82,12 @@ export default function OptionsContainer() {
         {durationsEntries.map(([timestamp, seconds], i) => (
           <CheckBox
             checked={timerDuration === seconds}
-            checkedIcon="dot-circle-o"
+            checkedIcon={<RNEIcon color="black" name="radio-button-checked" type="material" />}
             containerStyle={styles.checkboxContainer}
             key={`duration-option-${i}`}
             onPress={() => onSelectDurationOption(seconds)}
             title={timestamp}
-            uncheckedIcon="circle-o"
+            uncheckedIcon={<RNEIcon color="black" name="radio-button-unchecked" type="material" />}
           />
         ))}
         <CheckBox
@@ -134,12 +134,12 @@ export default function OptionsContainer() {
         {endingSoundOptions.map((sound, i) => (
           <CheckBox
             checked={endingSound === sound}
-            checkedIcon="dot-circle-o"
+            checkedIcon={<RNEIcon color="black" name="radio-button-checked" type="material" />}
             containerStyle={styles.checkboxContainer}
             key={`ending-sound-${i}`}
             onPress={() => onSelectEndingSoundOption(sound)}
             title={sound}
-            uncheckedIcon="circle-o"
+            uncheckedIcon={<RNEIcon color="black" name="radio-button-unchecked" type="material" />}
           />
         ))}
         <Dialog.Actions>
