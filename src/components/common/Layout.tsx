@@ -13,9 +13,8 @@ const styles = StyleSheet.create({
   layout: {
     backgroundColor: 'black',
     display: 'flex',
-    flex: 1,
-    height: '100%',
     flexDirection: 'row',
+    height: '100%',
     justifyContent: 'center',
   },
 });

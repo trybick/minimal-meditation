@@ -76,11 +76,11 @@ export default function TimerPage() {
           onPressPause={onPressPause}
           onPressResume={onPressResume}
         />
-
-        {isBackgroundTaskEnabled && (
-          <BackgroundTask functionToRun={updateTimerProgress} interval={1000} />
-        )}
       </View>
+
+      {isBackgroundTaskEnabled && (
+        <BackgroundTask functionToRun={updateTimerProgress} interval={1000} />
+      )}
     </Layout>
   );
 }
@@ -88,10 +88,8 @@ export default function TimerPage() {
 const styles = StyleSheet.create({
   pageContainer: {
     display: 'flex',
-    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
   },
   text: {
     color: colors.primary,
