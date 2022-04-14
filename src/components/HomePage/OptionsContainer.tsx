@@ -10,6 +10,7 @@ import { durationsEntries } from 'utils/durationOptions';
 import { convertMinutesToSeconds, convertSecondsToClockTime } from 'utils/time';
 import { STORAGE } from 'utils/storage';
 import { numberRegex } from 'utils/regex';
+import { playSound } from 'utils/soundPlayer';
 import { EndingSoundOption, endingSoundOptions } from 'utils/soundLibrary';
 import colors from 'style/colors';
 
@@ -54,9 +55,9 @@ export default function OptionsContainer() {
     setCustomDuration('');
   };
 
-  const onSelectEndingSoundOption = async (option: EndingSoundOption) => {
+  const onPressEndingSoundOption = async (option: EndingSoundOption) => {
+    playSound(option);
     setEndingSound(option);
-    closeEndingSoundDialog();
     await AsyncStorage.setItem(STORAGE.ENDING_SOUND, option);
   };
 
@@ -137,20 +138,15 @@ export default function OptionsContainer() {
             checkedIcon={<RNEIcon color="black" name="radio-button-checked" type="material" />}
             containerStyle={styles.checkboxContainer}
             key={`ending-sound-${i}`}
-            onPress={() => onSelectEndingSoundOption(sound)}
+            onPress={() => onPressEndingSoundOption(sound)}
             title={sound}
             uncheckedIcon={<RNEIcon color="black" name="radio-button-unchecked" type="material" />}
           />
         ))}
         <Dialog.Actions>
           <Dialog.Button
-            onPress={openEndingSoundDialog}
-            title="ENTER"
-            titleStyle={styles.colorWhite}
-          />
-          <Dialog.Button
             onPress={closeEndingSoundDialog}
-            title="CANCEL"
+            title="SAVE"
             titleStyle={styles.colorWhite}
           />
         </Dialog.Actions>
