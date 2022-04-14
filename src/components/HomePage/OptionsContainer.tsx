@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,19 +14,52 @@ import { playSound } from 'utils/soundPlayer';
 import { EndingSoundOption, endingSoundOptions } from 'utils/soundLibrary';
 import colors from 'style/colors';
 
+type State = {
+  // isDurationOptionsDialogOpen: boolean;
+  // isCustomDurationDialogOpen: boolean;
+  // isEndingSoundDialogOpen: boolean;
+  customDuration: string;
+};
+
+const initialState = {
+  // isDurationOptionsDialogOpen: false,
+  // isCustomDurationDialogOpen: false,
+  // isEndingSoundDialogOpen: false,
+  customDuration: '',
+};
+
+type DialogName = 'DurationOptions' | 'CustomDuration' | 'EndingSound';
+
+type Action =
+  // | { type: 'openDialog'; dialogName: DialogName }
+  // | { type: 'closeDialog'; dialogName: DialogName }
+  { type: 'setCustomDuration'; value: string };
+
+function reducer(state: State, action: Action) {
+  switch (action.type) {
+    // case 'openDialog':
+    //   return { count: state.count + 1 };
+    case 'setCustomDuration':
+      return { customDuration: action.value };
+    default:
+      throw new Error();
+  }
+}
+
 export default function OptionsContainer() {
   const [timerDuration, setTimerDuration] = useRecoilState(selectTimerDuration);
   const [endingSound, setEndingSound] = useRecoilState(selectEndingSound);
   const [isDurationOptionsDialogOpen, setIsDurationOptionsDialogOpen] = useState(false);
   const [isCustomDurationDialogOpen, setIsCustomDurationDialogOpen] = useState(false);
   const [isEndingSoundDialogOpen, setIsEndingSoundDialogOpen] = useState(false);
-  const [customDuration, setCustomDuration] = useState('');
   const openDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(true);
   const closeDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(false);
   const openCustomDurationDialog = () => setIsCustomDurationDialogOpen(true);
   const closeCustomDurationDialog = () => setIsCustomDurationDialogOpen(false);
   const openEndingSoundDialog = () => setIsEndingSoundDialogOpen(true);
   const closeEndingSoundDialog = () => setIsEndingSoundDialogOpen(false);
+
+  const [{ customDuration }, dispatch] = useReducer(reducer, initialState);
 
   const onSelectDurationOption = async (option: number) => {
     setTimerDuration(option);
@@ -39,11 +72,11 @@ export default function OptionsContainer() {
     openCustomDurationDialog();
   };
 
-  const onCustomDurationChange = (duration: string) => {
-    if (!duration) {
-      setCustomDuration('');
-    } else if (numberRegex.test(duration)) {
-      setCustomDuration(duration);
+  const onCustomDurationChange = (value: string) => {
+    if (!value) {
+      dispatch({ type: 'setCustomDuration', value: '' });
+    } else if (numberRegex.test(value)) {
+      dispatch({ type: 'setCustomDuration', value });
     }
   };
 
@@ -52,7 +85,12 @@ export default function OptionsContainer() {
     setTimerDuration(customDurationToSet);
     closeCustomDurationDialog();
     await AsyncStorage.setItem(STORAGE.SAVED_DURATION, String(customDurationToSet));
-    setCustomDuration('');
+    dispatch({ type: 'setCustomDuration', value: '' });
+  };
+
+  const onPressCancelCustomDuration = () => {
+    dispatch({ type: 'setCustomDuration', value: '' });
+    closeCustomDurationDialog();
   };
 
   const onPressEndingSoundOption = async (option: EndingSoundOption) => {
@@ -124,7 +162,7 @@ export default function OptionsContainer() {
             titleStyle={styles.colorWhite}
           />
           <Dialog.Button
-            onPress={closeCustomDurationDialog}
+            onPress={onPressCancelCustomDuration}
             title="CANCEL"
             titleStyle={styles.colorWhite}
           />
