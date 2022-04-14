@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import { useReducer } from 'react';
 import { useRecoilValue } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from '@rneui/base';
@@ -10,23 +10,12 @@ import colors from 'style/colors';
 import DurationOptionsDialog from './Dialogs/DurationOptionsDialog';
 import CustomDurationDialog from './Dialogs/CustomDurationDialog';
 import EndingSoundDialog from './Dialogs/EndingSoundDialog';
-
-type State = {
-  currentDialog: DialogName | null;
-  customDuration: string;
-};
+import { Action, DialogName, State } from './OptionsContainerTypes';
 
 const initialState = {
   currentDialog: null,
   customDuration: '',
 };
-
-export type DialogName = 'DurationOptions' | 'CustomDuration' | 'EndingSound';
-
-export type Action =
-  | { type: 'openDialog'; name: DialogName }
-  | { type: 'closeDialogs' }
-  | { type: 'setCustomDuration'; value: string };
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {

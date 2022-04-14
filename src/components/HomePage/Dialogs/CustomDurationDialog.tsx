@@ -7,7 +7,7 @@ import { selectTimerDuration } from 'state/duration';
 import { STORAGE } from 'utils/storage';
 import { numberRegex } from 'utils/regex';
 import { convertMinutesToSeconds } from 'utils/time';
-import { Action } from '../OptionsContainer';
+import { Action } from '../OptionsContainerTypes';
 
 export default function CustomDurationDialog({
   isVisible,

@@ -6,7 +6,7 @@ import { durationsEntries } from 'utils/durationOptions';
 import { selectTimerDuration } from 'state/duration';
 import { STORAGE } from 'utils/storage';
 import colors from 'style/colors';
-import { DialogName } from '../OptionsContainer';
+import { DialogName } from '../OptionsContainerTypes';
 
 export default function DurationOptionsDialog({
   isVisible,
