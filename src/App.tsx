@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { LogBox, View } from 'react-native';
+import { LogBox } from 'react-native';
 import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';
 import { RecoilRoot } from 'recoil';
 import { registerRootComponent } from 'expo';
@@ -9,6 +9,7 @@ import { ROUTES } from 'utils/routes';
 import { loadSounds, unloadSounds } from 'utils/soundPlayer';
 import HomePage from 'components/HomePage/HomePage';
 import TimerPage from 'components/TimerPage/TimerPage';
+import SuspenseFallback from 'components/common/SuspenseFallback';
 
 export default function App() {
   useEffect(() => {
@@ -19,9 +20,7 @@ export default function App() {
 
   return (
     <RecoilRoot>
-      <Suspense
-        fallback={<View style={{ backgroundColor: 'black', height: '100%', width: '100%' }} />}
-      >
+      <Suspense fallback={<SuspenseFallback />}>
         <ThemeProvider>
           <NativeRouter>
             <BackButton />
