@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import { useRecoilState } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,32 +15,30 @@ import { EndingSoundOption, endingSoundOptions } from 'utils/soundLibrary';
 import colors from 'style/colors';
 
 type State = {
-  // isDurationOptionsDialogOpen: boolean;
-  // isCustomDurationDialogOpen: boolean;
-  // isEndingSoundDialogOpen: boolean;
+  currentDialog: DialogName | null;
   customDuration: string;
 };
 
 const initialState = {
-  // isDurationOptionsDialogOpen: false,
-  // isCustomDurationDialogOpen: false,
-  // isEndingSoundDialogOpen: false,
+  currentDialog: null,
   customDuration: '',
 };
 
 type DialogName = 'DurationOptions' | 'CustomDuration' | 'EndingSound';
 
 type Action =
-  // | { type: 'openDialog'; dialogName: DialogName }
-  // | { type: 'closeDialog'; dialogName: DialogName }
-  { type: 'setCustomDuration'; value: string };
+  | { type: 'openDialog'; name: DialogName }
+  | { type: 'closeDialogs' }
+  | { type: 'setCustomDuration'; value: string };
 
-function reducer(state: State, action: Action) {
+function reducer(state: State, action: Action): State {
   switch (action.type) {
-    // case 'openDialog':
-    //   return { count: state.count + 1 };
+    case 'openDialog':
+      return { ...state, currentDialog: action.name };
+    case 'closeDialogs':
+      return { ...state, currentDialog: null };
     case 'setCustomDuration':
-      return { customDuration: action.value };
+      return { ...state, customDuration: action.value };
     default:
       throw new Error();
   }
@@ -49,27 +47,16 @@ function reducer(state: State, action: Action) {
 export default function OptionsContainer() {
   const [timerDuration, setTimerDuration] = useRecoilState(selectTimerDuration);
   const [endingSound, setEndingSound] = useRecoilState(selectEndingSound);
-  const [isDurationOptionsDialogOpen, setIsDurationOptionsDialogOpen] = useState(false);
-  const [isCustomDurationDialogOpen, setIsCustomDurationDialogOpen] = useState(false);
-  const [isEndingSoundDialogOpen, setIsEndingSoundDialogOpen] = useState(false);
-  const openDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(true);
-  const closeDurationOptionsDialog = () => setIsDurationOptionsDialogOpen(false);
-  const openCustomDurationDialog = () => setIsCustomDurationDialogOpen(true);
-  const closeCustomDurationDialog = () => setIsCustomDurationDialogOpen(false);
-  const openEndingSoundDialog = () => setIsEndingSoundDialogOpen(true);
-  const closeEndingSoundDialog = () => setIsEndingSoundDialogOpen(false);
+  const [{ currentDialog, customDuration }, dispatch] = useReducer(reducer, initialState);
 
-  const [{ customDuration }, dispatch] = useReducer(reducer, initialState);
+  const isDialogVisible = (name: DialogName) => currentDialog === name;
+  const openDialog = (name: DialogName) => dispatch({ type: 'openDialog', name });
+  const closeDialogs = () => dispatch({ type: 'closeDialogs' });
 
   const onSelectDurationOption = async (option: number) => {
     setTimerDuration(option);
-    closeDurationOptionsDialog();
+    closeDialogs();
     await AsyncStorage.setItem(STORAGE.SAVED_DURATION, String(option));
-  };
-
-  const onPressCustomDurationOption = () => {
-    closeDurationOptionsDialog();
-    openCustomDurationDialog();
   };
 
   const onCustomDurationChange = (value: string) => {
@@ -83,14 +70,14 @@ export default function OptionsContainer() {
   const onCustomDurationSubmit = async () => {
     const customDurationToSet = convertMinutesToSeconds(+customDuration);
     setTimerDuration(customDurationToSet);
-    closeCustomDurationDialog();
+    closeDialogs();
     await AsyncStorage.setItem(STORAGE.SAVED_DURATION, String(customDurationToSet));
     dispatch({ type: 'setCustomDuration', value: '' });
   };
 
   const onPressCancelCustomDuration = () => {
     dispatch({ type: 'setCustomDuration', value: '' });
-    closeCustomDurationDialog();
+    closeDialogs();
   };
 
   const onPressEndingSoundOption = async (option: EndingSoundOption) => {
@@ -101,7 +88,10 @@ export default function OptionsContainer() {
 
   return (
     <View style={styles.optionsContainer}>
-      <TouchableOpacity onPress={openDurationOptionsDialog} style={styles.optionContainer}>
+      <TouchableOpacity
+        onPress={() => openDialog('DurationOptions')}
+        style={styles.optionContainer}
+      >
         <Text style={styles.optionText}>Duration</Text>
         <View style={styles.currentSetting}>
           <Text style={styles.optionText}>{convertSecondsToClockTime(timerDuration)}</Text>
@@ -109,7 +99,7 @@ export default function OptionsContainer() {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={openEndingSoundDialog} style={styles.optionContainer}>
+      <TouchableOpacity onPress={() => openDialog('EndingSound')} style={styles.optionContainer}>
         <Text style={styles.optionText}>Ending Sound</Text>
         <View style={styles.currentSetting}>
           <Text style={styles.optionText}>{endingSound}</Text>
@@ -117,7 +107,7 @@ export default function OptionsContainer() {
         </View>
       </TouchableOpacity>
 
-      <Dialog isVisible={isDurationOptionsDialogOpen} onBackdropPress={closeDurationOptionsDialog}>
+      <Dialog isVisible={isDialogVisible('DurationOptions')} onBackdropPress={() => closeDialogs()}>
         {durationsEntries.map(([timestamp, seconds], i) => (
           <CheckBox
             checked={timerDuration === seconds}
@@ -134,20 +124,20 @@ export default function OptionsContainer() {
           checkedIcon="dot-circle-o"
           containerStyle={styles.checkboxContainer}
           key="custom"
-          onPress={onPressCustomDurationOption}
+          onPress={() => openDialog('CustomDuration')}
           title="Custom"
           uncheckedIcon="circle-o"
         />
         <Dialog.Actions>
           <Dialog.Button
-            onPress={closeDurationOptionsDialog}
+            onPress={() => closeDialogs()}
             title="CANCEL"
             titleStyle={styles.colorWhite}
           />
         </Dialog.Actions>
       </Dialog>
 
-      <Dialog isVisible={isCustomDurationDialogOpen} onBackdropPress={closeCustomDurationDialog}>
+      <Dialog isVisible={isDialogVisible('CustomDuration')} onBackdropPress={() => closeDialogs()}>
         <Input
           inputStyle={styles.colorWhite}
           onChangeText={onCustomDurationChange}
@@ -169,7 +159,7 @@ export default function OptionsContainer() {
         </Dialog.Actions>
       </Dialog>
 
-      <Dialog isVisible={isEndingSoundDialogOpen} onBackdropPress={closeEndingSoundDialog}>
+      <Dialog isVisible={isDialogVisible('EndingSound')} onBackdropPress={() => closeDialogs()}>
         {endingSoundOptions.map((sound, i) => (
           <CheckBox
             checked={endingSound === sound}
@@ -183,7 +173,7 @@ export default function OptionsContainer() {
         ))}
         <Dialog.Actions>
           <Dialog.Button
-            onPress={closeEndingSoundDialog}
+            onPress={() => closeDialogs()}
             title="SAVE"
             titleStyle={styles.colorWhite}
           />
