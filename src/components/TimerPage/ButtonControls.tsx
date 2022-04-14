@@ -24,12 +24,12 @@ export default function ButtonControls({
 
   return (
     <View style={styles.buttonsContainer}>
-      <AntIcon color={colors.primary} name="back" onPress={onPressBack} size={25} />
+      <AntIcon color={colors.primary} name="back" onPress={onPressBack} size={30} />
       <MaterialIcon
         color={isTimerEnded ? colors.hidden : colors.primary}
         name={isCountingDown ? 'pause' : 'play'}
         onPress={isCountingDown ? onPressPause : onPressResume}
-        size={40}
+        size={60}
       />
       {/* This third icon is only here to take up a blank space so Pause icon is centered */}
       <AntIcon color={colors.hidden} name="back" size={25} />
@@ -44,5 +44,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '80%',
+    marginTop: 50,
   },
 });

@@ -69,7 +69,7 @@ export default function TimerPage() {
   return (
     <Layout>
       <View style={styles.pageContainer}>
-        <Text style={styles.text}>{convertSecondsToClockTime(secondsRemaining)}</Text>
+        <Text style={styles.timeRemainingText}>{convertSecondsToClockTime(secondsRemaining)}</Text>
         <ButtonControls
           isCountingDown={isCountingDown}
           isTimerEnded={secondsRemaining === 0}
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
+  timeRemainingText: {
     color: colors.primary,
-    fontSize: 22,
+    fontSize: 50,
   },
 });
