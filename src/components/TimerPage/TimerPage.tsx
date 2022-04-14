@@ -87,13 +87,14 @@ export default function TimerPage() {
 
 const styles = StyleSheet.create({
   pageContainer: {
-    marginTop: 100,
+    display: 'flex',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
   text: {
     color: colors.primary,
     fontSize: 22,
-    marginTop: 100,
   },
 });

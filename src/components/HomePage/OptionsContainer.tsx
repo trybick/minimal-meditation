@@ -45,17 +45,17 @@ export default function OptionsContainer() {
         onPress={() => openDialog('DurationOptions')}
         style={styles.optionContainer}
       >
-        <Text style={styles.optionText}>Duration</Text>
+        <Text style={styles.text}>Duration</Text>
         <View style={styles.currentSetting}>
-          <Text style={styles.optionText}>{convertSecondsToClockTime(timerDuration)}</Text>
+          <Text style={styles.text}>{convertSecondsToClockTime(timerDuration)}</Text>
           <Icon color={colors.primary} name="chevron-small-right" size={22} />
         </View>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => openDialog('EndingSound')} style={styles.optionContainer}>
-        <Text style={styles.optionText}>Ending Sound</Text>
+        <Text style={styles.text}>Ending Sound</Text>
         <View style={styles.currentSetting}>
-          <Text style={styles.optionText}>{endingSound}</Text>
+          <Text style={styles.text}>{endingSound}</Text>
           <Icon color={colors.primary} name="chevron-small-right" size={22} />
         </View>
       </TouchableOpacity>
@@ -79,9 +79,7 @@ export default function OptionsContainer() {
 const styles = StyleSheet.create({
   optionsContainer: {
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 400,
     width: '100%',
   },
   optionContainer: {
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
   },
-  optionText: {
+  text: {
     color: colors.primary,
     fontSize: 18,
     marginRight: 5,

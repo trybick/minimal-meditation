@@ -39,7 +39,6 @@ export default function ButtonControls({
 
 const styles = StyleSheet.create({
   buttonsContainer: {
-    marginTop: 500,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
