@@ -3,8 +3,8 @@ import { useRecoilValue } from 'recoil';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from '@rneui/base';
 import Icon from 'react-native-vector-icons/Entypo';
-import { selectTimerDuration } from 'state/duration';
-import { selectEndingSound } from 'state/settings';
+import { timerDurationState } from 'state/duration';
+import { endingSoundState } from 'state/settings';
 import { convertSecondsToClockTime } from 'utils/time';
 import colors from 'style/colors';
 import DurationOptionsDialog from './Dialogs/DurationOptionsDialog';
@@ -31,8 +31,8 @@ function reducer(state: State, action: Action): State {
 }
 
 export default function OptionsContainer() {
-  const timerDuration = useRecoilValue(selectTimerDuration);
-  const endingSound = useRecoilValue(selectEndingSound);
+  const timerDuration = useRecoilValue(timerDurationState);
+  const endingSound = useRecoilValue(endingSoundState);
   const [{ currentDialog, customDuration }, dispatch] = useReducer(reducer, initialState);
 
   const isDialogVisible = (name: DialogName) => currentDialog === name;

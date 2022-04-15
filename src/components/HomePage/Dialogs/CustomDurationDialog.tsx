@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useSetRecoilState } from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dialog, Input } from '@rneui/base';
-import { selectTimerDuration } from 'state/duration';
+import { timerDurationState } from 'state/duration';
 import { STORAGE } from 'utils/storage';
 import { numberRegex } from 'utils/regex';
 import { convertMinutesToSeconds } from 'utils/time';
@@ -20,7 +20,7 @@ export default function CustomDurationDialog({
   dispatch: Dispatch<Action>;
   customDuration: string;
 }) {
-  const setTimerDuration = useSetRecoilState(selectTimerDuration);
+  const setTimerDuration = useSetRecoilState(timerDurationState);
   const clearInput = () => dispatch({ type: 'setCustomDuration', value: '' });
 
   const onChange = (value: string) => {

@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Icon as RNEIcon } from '@rneui/base';
 import { STORAGE } from 'utils/storage';
-import { selectEndingSound } from 'state/settings';
+import { endingSoundState } from 'state/settings';
 import { EndingSoundOption, endingSoundOptions } from 'utils/soundLibrary';
 import { playSound } from 'utils/soundPlayer';
 import colors from 'style/colors';
@@ -15,7 +15,7 @@ export default function EndingSoundDialog({
   isVisible: boolean;
   closeDialogs: () => void;
 }) {
-  const [endingSound, setEndingSound] = useRecoilState(selectEndingSound);
+  const [endingSound, setEndingSound] = useRecoilState(endingSoundState);
 
   const onPressEndingSoundOption = async (option: EndingSoundOption) => {
     playSound(option);

@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CheckBox, Dialog, Icon as RNEIcon } from '@rneui/base';
 import { durationsEntries } from 'utils/durationOptions';
-import { selectTimerDuration } from 'state/duration';
+import { timerDurationState } from 'state/duration';
 import { STORAGE } from 'utils/storage';
 import colors from 'style/colors';
 import { DialogName } from '../OptionsContainerTypes';
@@ -17,7 +17,7 @@ export default function DurationOptionsDialog({
   closeDialogs: () => void;
   openDialog: (name: DialogName) => void;
 }) {
-  const [timerDuration, setTimerDuration] = useRecoilState(selectTimerDuration);
+  const [timerDuration, setTimerDuration] = useRecoilState(timerDurationState);
 
   const onSelectDurationOption = async (option: number) => {
     setTimerDuration(option);

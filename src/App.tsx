@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from '@rneui/themed';
+import { initializeState } from 'state/initializeState';
 import { ROUTES } from 'utils/routes';
 import { loadSounds, unloadSounds } from 'utils/soundPlayer';
 import HomePage from 'components/HomePage/HomePage';
@@ -19,7 +20,7 @@ export default function App() {
   }, []);
 
   return (
-    <RecoilRoot>
+    <RecoilRoot initializeState={initializeState}>
       <Suspense fallback={<SuspenseFallback />}>
         <ThemeProvider>
           <NativeRouter>
