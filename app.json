@@ -19,6 +19,9 @@
       "infoPlist": {
         "UIBackgroundModes": ["audio"]
       }
+    },
+    "android": {
+      "softwareKeyboardLayoutMode": "pan"
     }
   }
 }
