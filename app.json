@@ -21,7 +21,8 @@
       }
     },
     "android": {
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.trybicki.minimalmeditation"
     }
   }
 }
