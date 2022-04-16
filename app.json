@@ -3,7 +3,7 @@
     "name": "mininmal meditation",
     "slug": "minimal-meditation",
     "description": "Meditation timer",
-    "privacy": "unlisted",
+    "privacy": "public",
     "version": "0.0.1",
     "orientation": "default",
     "splash": {
