@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSetRecoilState } from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,6 +22,7 @@ export default function CustomDurationDialog({
 }) {
   const setTimerDuration = useSetRecoilState(timerDurationState);
   const clearInput = () => dispatch({ type: 'setCustomDuration', value: '' });
+  const inputRef = useRef<Input | null>(null);
 
   const onChange = (value: string) => {
     if (!value) {
@@ -44,12 +45,18 @@ export default function CustomDurationDialog({
     closeDialogs();
   };
 
+  const onDialogShow = () => {
+    setTimeout(() => inputRef.current?.focus(), 100);
+  };
+
   return (
-    <Dialog isVisible={isVisible} onBackdropPress={() => closeDialogs()}>
+    <Dialog isVisible={isVisible} onBackdropPress={() => closeDialogs()} onShow={onDialogShow}>
       <Input
         inputStyle={styles.colorWhite}
+        keyboardType="numeric"
         onChangeText={onChange}
         placeholder="Duration in minutes"
+        ref={inputRef as any}
         shake={() => null}
         value={customDuration}
       />
