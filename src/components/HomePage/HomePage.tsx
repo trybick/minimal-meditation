@@ -7,7 +7,7 @@ import StartButton from './StartButton';
 import DurationOptionsDialog from './Dialogs/DurationOptionsDialog';
 import CustomDurationDialog from './Dialogs/CustomDurationDialog';
 import EndingSoundDialog from './Dialogs/EndingSoundDialog';
-import { Action, DialogName, State } from './OptionsContainerTypes';
+import { Action, DialogName, State } from './HomePageTypes';
 
 const initialState = {
   currentDialog: null,

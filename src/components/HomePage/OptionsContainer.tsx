@@ -6,7 +6,7 @@ import { timerDurationState } from 'state/duration';
 import { endingSoundState } from 'state/settings';
 import { convertSecondsToClockTime } from 'utils/time';
 import colors from 'style/colors';
-import { DialogName } from './OptionsContainerTypes';
+import { DialogName } from './HomePageTypes';
 
 export default function OptionsContainer({
   openDialog,
