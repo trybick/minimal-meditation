@@ -40,12 +40,12 @@ export default function DurationOptionsDialog({
       ))}
       <CheckBox
         checked={false}
-        checkedIcon="dot-circle-o"
+        checkedIcon={<RNEIcon color="black" name="radio-button-checked" type="material" />}
         containerStyle={styles.checkboxContainer}
         key="custom"
         onPress={() => openDialog('CustomDuration')}
         title="Custom"
-        uncheckedIcon="circle-o"
+        uncheckedIcon={<RNEIcon color="black" name="radio-button-unchecked" type="material" />}
       />
       <Dialog.Actions>
         <Dialog.Button
