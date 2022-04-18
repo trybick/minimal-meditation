@@ -3,6 +3,7 @@
     "name": "mininmal meditation",
     "slug": "minimal-meditation",
     "description": "Meditation timer",
+    "icon": "./assets/images/app-icon.png",
     "privacy": "public",
     "version": "0.0.1",
     "orientation": "default",
