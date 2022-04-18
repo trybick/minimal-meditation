@@ -2,7 +2,6 @@ import { Suspense, useEffect } from 'react';
 import { LogBox } from 'react-native';
 import { BackButton, NativeRouter, Route, Switch } from 'react-router-native';
 import { RecoilRoot } from 'recoil';
-import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from '@rneui/themed';
 import { initializeState } from 'state/initializeState';
@@ -36,5 +35,3 @@ export default function App() {
     </RecoilRoot>
   );
 }
-
-registerRootComponent(App);
