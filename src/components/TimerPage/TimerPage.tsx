@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
   timeRemainingText: {
     color: colors.primary,
