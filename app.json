@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mininmal meditation",
+    "name": "Mininmal Meditation",
     "slug": "minimal-meditation",
     "description": "Meditation timer",
     "icon": "./assets/images/icon.png",
     "privacy": "public",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "orientation": "default",
     "splash": {
       "resizeMode": "contain",
