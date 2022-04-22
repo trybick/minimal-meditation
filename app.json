@@ -24,7 +24,8 @@
     },
     "android": {
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.trybicki.minimalmeditation"
+      "package": "com.trybicki.minimalmeditation",
+      "versionCode": 2
     }
   }
 }
