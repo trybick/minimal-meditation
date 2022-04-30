@@ -4,7 +4,7 @@
     "slug": "minimal-meditation",
     "description": "Meditation timer",
     "privacy": "public",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "orientation": "default",
     "splash": {
       "resizeMode": "contain",
@@ -13,20 +13,25 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "icon": "./assets/images/icon-ios.png",
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["audio"]
+        "UIBackgroundModes": [
+          "audio"
+        ]
       },
-      "bundleIdentifier": "com.trybicki.minimalmeditation"
+      "bundleIdentifier": "com.trybicki.minimalmeditation",
+      "buildNumber": "2"
     },
     "android": {
       "icon": "./assets/images/icon-android.png",
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.trybicki.minimalmeditation",
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }
