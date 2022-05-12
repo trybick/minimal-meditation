@@ -4,7 +4,7 @@
     "slug": "minimal-meditation",
     "description": "Meditation timer",
     "privacy": "public",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "orientation": "default",
     "splash": {
       "resizeMode": "contain",
@@ -25,13 +25,13 @@
         ]
       },
       "bundleIdentifier": "com.trybicki.minimalmeditation",
-      "buildNumber": "3"
+      "buildNumber": "5"
     },
     "android": {
       "icon": "./assets/images/icon-android.png",
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.trybicki.minimalmeditation",
-      "versionCode": 3
+      "versionCode": 4
     }
   }
 }

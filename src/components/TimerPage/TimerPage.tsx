@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { StyleSheet, View } from 'react-native';
+import { useKeepAwake } from 'expo-keep-awake';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text } from '@rneui/base';
 import { differenceInSeconds } from 'date-fns';
@@ -15,6 +16,7 @@ import Layout from 'components/common/Layout';
 import ButtonControls from './ButtonControls';
 
 export default function TimerPage() {
+  useKeepAwake();
   const timerDuration = useRecoilValue(timerDurationState);
   const endingSound = useRecoilValue(endingSoundState);
   const [secondsRemaining, setSecondsRemaining] = useState(timerDuration);
