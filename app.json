@@ -31,7 +31,12 @@
       "icon": "./assets/images/icon-android.png",
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.trybicki.minimalmeditation",
-      "versionCode": 4
+      "versionCode": 7
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0f498dea-f5a1-4c63-85c4-d15671278798"
+      }
     }
   }
 }
